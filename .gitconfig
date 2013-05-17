@@ -1,0 +1,29 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+    interactive = auto
+    grep = auto
+[push]
+    default = tracking
+[user]
+    name = Tetsuro Higuchi
+    email = higuchi.tetsuro@gmail.com
+[alias]
+    co = checkout
+    br = branch
+    st = status
+    df = diff
+    df1 = diff HEAD~
+    df2 = diff HEAD~~
+    df3 = diff HEAD~~~
+    df4 = diff HEAD~~~~
+    df5 = diff HEAD~~~~~
+    df10 = diff HEAD~~~~~~~~~~
+    ci = commit
+    hist = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
+    dc = diff --cached
+    gr = grep
+[core]
+	excludesfile = /Users/tetsu/.gitignore
+	whitespace = cr-at-eol
