@@ -36470,50 +36470,170 @@ less .zsh/zshrc.mine
 echo $(brew --prefix coreutils)
 less .zsh/zshrc.mine
 exit
-: 1368757024:0;ll
-: 1368757036:0;cd Dropbox/
-: 1368757037:0;ll
-: 1368757043:0;cd env/
-: 1368757043:0;ll
-: 1368757047:0;cd dotfiles/
-: 1368757048:0;ll
-: 1368757050:0;ll -a
-: 1368757057:0;rm -rf .DS_Store
-: 1368757059:0;ll
-: 1368757069:0;ll -a
-: 1368757371:0;git init
-: 1368757379:0;git commit -m "first commit"
-: 1368757383:0;git add .
-: 1368757391:0;git commit -m "first commit"
-: 1368757406:0;git remote add origin https://github.com/guccyon/dotfiles.git
-: 1368757415:0;git push -u origin master
-: 1368757477:0;git remote -v
-: 1368757520:0;git remote rm origin
-: 1368757523:0;git remote add git@github.com:guccyon/dotfiles.git
-: 1368757534:0;git remote add origin git@github.com:guccyon/dotfiles.git
-: 1368757541:0;git fetch origin
-: 1368757600:0;ls
-: 1368757603:0;cd ..
-: 1368757603:0;ls
-: 1368757604:0;open .
-: 1368757669:0;ls
-: 1368757672:0;cd dotfiles/
-: 1368757672:0;ls
-: 1368757676:0;open .
-: 1368757682:0;ls
-: 1368757684:0;ll -a
-: 1368757690:0;rm -rf .git
-: 1368757700:0;vi .gitignore
-: 1368757724:0;ll -a
-: 1368757742:0;ls
-: 1368757745:0;cd ..
-: 1368757747:0;ll -a
-: 1368757752:0;cd ..
-: 1368757753:0;ll -a
-: 1368757813:0;git st
-: 1368757829:0;cd Dropbox/env/dotfiles/
-: 1368757830:0;ll
-: 1368757833:0;vi .gitignore
-: 1368757844:0;git init
-: 1368757847:0;git st
-: 1368757851:0;git add .
+ll
+cd Dropbox/
+ll
+cd env/
+ll
+cd dotfiles/
+ll
+ll -a
+rm -rf .DS_Store
+ll
+ll -a
+git init
+git commit -m "first commit"
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/guccyon/dotfiles.git
+git push -u origin master
+git remote -v
+git remote rm origin
+git remote add git@github.com:guccyon/dotfiles.git
+git remote add origin git@github.com:guccyon/dotfiles.git
+git fetch origin
+ls
+cd ..
+ls
+open .
+ls
+cd dotfiles/
+ls
+open .
+ls
+ll -a
+rm -rf .git
+vi .gitignore
+ll -a
+ls
+cd ..
+ll -a
+cd ..
+ll -a
+git st
+cd Dropbox/env/dotfiles/
+ll
+vi .gitignore
+git init
+git st
+git add .
+git commit -m "first commit"
+''
+git remote add origin git@github.com:guccyon/dotfiles.git
+git push -u origin master
+open .
+ll
+ls
+ll -a
+cd .vim/
+ll
+ll -a
+rm -rf .vim
+ll
+less .netrwhist
+cd ..
+ll
+ll -a
+cd .zsh/
+ll -a
+rm .DS_Store
+cd .zsh/
+ll
+cd ..
+cd ~/Dropbox/env/dotfiles/.zsh/
+ll
+cd .zsh/
+ll
+less zshrc.mine
+cd ..
+ll
+rm -rf .zsh
+ll
+cd ..
+git st
+cd dotfiles/
+git st
+git add .
+ll
+ll -a
+cd .git/
+ll
+cd ..
+ll -a
+git commit -m "delete duplicate files"
+cd ..
+ls
+open .
+ls
+less create_links.sh
+vi create_links.sh
+ls
+mv create_links.sh dotfiles/
+ls
+cd
+ll -a
+cd .org/
+ll
+ll -a
+cd ..
+ll
+rm -rf .org
+ls
+cd dotfiles/
+ls
+sh create_links.sh
+ll -a
+cd .org/
+ll
+ll -a
+cd .git/
+ls
+cd ..
+ll
+ls
+vi create_links.sh
+sh create_links.sh
+vi create_links.sh
+cd
+cd Dropbox/env/dotfiles/
+sh create_links.sh
+vi create_links.sh
+sh create_links.sh
+rm -rf .org
+sh create_links.sh
+ls .org/
+ll -a .org/
+mv .org/.* .
+ll -a
+rm -rf .org
+sh create_links.sh
+ll -a .org/
+mv .org/.* .
+rmdir .org
+sh create_links.sh
+ll -a .org/
+ls /Users/tetsu/Dropbox/env/dotfiles/.emacs
+ln -s /Users/tetsu/Dropbox/env/dotfiles/.emacs /Users/tetsu/.emacs
+sh create_links.sh
+ll -a .org/
+ln -s /Users/tetsu/Dropbox/env/dotfiles/.emacs /Users/tetsu/.emacs
+ll .org/
+ll -a .org/
+ls
+rm -rf .org
+sh create_links.sh
+ll -a .org/
+rm -rf .org/
+ll -a
+vi .zshrc
+exit
+exit
+: 1368762320:0;ls
+: 1368762322:0;git st
+: 1368762335:0;git log
+: 1368762344:0;tig
+: 1368762355:0;git log --stat
+: 1368762379:0;git st
+: 1368762391:0;git log
+: 1368762397:0;git log --stat
+: 1368762407:0;git add -u
