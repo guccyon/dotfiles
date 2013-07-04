@@ -11,32 +11,37 @@ if [ -e $HOME/bin ]; then
     export PATH=$HOME/bin:$PATH
 fi
 
-## color ###################################
-autoload colors
+## colors ##################################
+autoload -Uz colors
 colors
-setopt PROMPT_SUBST
-#local DEFAULT=$'%{\e[1;m%}'
-#local RANDCOLOR=$'%{\e[1;$[31+RANDOM%6]m%}'
+
+if [ -f ~/.dircolors ]; then
+  if type dircolors > /dev/null 2>&1; then
+    eval $(dircolors ~/.dircolors)
+  elif type gdircolors > /dev/null 2>&1; then
+    eval $(gdircolors ~/.dircolors)
+  fi
+fi
 
 ## prompt ##################################
+setopt prompt_subst
+
 case ${UID} in
-501)
-  #PROMPT="%B%{${fg[blue]}%}%/#%{${reset_color}%}%b "
-  PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
-  PROMPT="[%n@%m] # "
-  #PROMPT="[%{${fg[blue]}%}%n@%m%{${reset_color}%}] %{${fg[blue]}%}#%{${reset_color}%} "
-  #PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
-  RPROMPT="%{${fg[green]}%}[%~]%{${reset_color}%}"
-  SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-          PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-  ;;
-*)
+  0)
   #PROMPT="[%n@%m] %{${fg[blue]}%}#%{${reset_color}%} "
   PROMPT="[%n] %{${fg[blue]}%}#%{${reset_color}%} "
   PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[blue]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
+  ;;
+  *)
+  PROMPT="%{$fg_bold[blue]%}%n@%m%{$fg_bold[white]%}%%%{$reset_color%} "  
+  PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
+  #PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
+  RPROMPT="%{${fg[green]}%}[%~]%{${reset_color}%}"
+  SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
+  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
+          PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
   ;;
 esac
 
@@ -45,6 +50,8 @@ fpath=(~/.zsh/functions/Completion ${fpath})
 fpath=(~/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit
 compinit -d ~/.zsh/zcompdump
+setopt list_packed
+setopt list_types
   
 ## zstyle ############### 
 zstyle ':completion:*:default' menu select=2
@@ -55,24 +62,30 @@ zstyle ':completion:*:warnings' format '%F{RED}No matches for:''%F{YELLOW} %d'$D
 zstyle ':completion:*:descriptions' format '%F{YELLOW}completing %B%d%b'$DEFAULT
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:descriptions' format '%F{yellow}Completing %B%d%b%f'$DEFAULT
-
-# # マッチ種別を別々に表示
-zstyle ':completion:*' group-name ''
+zstyle ':completion:*' group-name ''  #マッチ種別を別々に表示
+[ -n "$LS_COLORS" ] && zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 ## keymap ###################################
 bindkey -e # emacs keybind
 #bindkey -v # vi keybind
 
+## changing directory #######################
+setopt auto_cd 
+setopt autopushd
+setopt pushdignoredups
+setopt pushdminus
+
+chpwd_functions+=(ls_abbrev)
+
 ## history ##################################
+HISTFILE=~/.zsh/history
+HISTSIZE=100000
+SAVEHIST=100000
 setopt hist_ignore_dups
 setopt hist_reduce_blanks
 setopt share_history
 setopt hist_no_store
 setopt hist_expand
-HISTFILE=~/.zsh/history
-HISTSIZE=50000
-SAVEHIST=50000
-
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -82,26 +95,32 @@ bindkey "\\ep" history-beginning-search-backward-end
 bindkey "\\en" history-beginning-search-forward-end
 function history-all { history -E 1 }
 
+## 
+
+## zsh-syntax-highlighting ##################################
+if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
 ## editor ###################################
 autoload zed
 
+
 ## options ##################################
-setopt correct
 setopt nolistbeep 
-setopt auto_cd 
-setopt autopushd
-setopt list_packed
-setopt complete_aliases
 setopt nobeep
 setopt auto_menu
+setopt auto_list
 setopt auto_param_keys
 setopt auto_param_slash
+setopt correct
 setopt noautoremoveslash
 setopt interactive_comments  # コマンドラインでも # 以降をコメントと見なす
 
 
 ## aliases ##################################
-alias ls="ls -G"
+setopt complete_aliases
+alias ls="ls -G -v -F --color=auto"
 alias la="ls -a"
 alias lf="ls -F"
 alias ll='ls -l'
@@ -117,10 +136,8 @@ alias diff='colordiff'
 
 
 ## functions ################################
-chpwd() {
-    ls_abbrev
-}
-ls_abbrev() {
+
+function ls_abbrev() {
     # -a : Do not ignore entries starting with ..
     # -C : Force multi-column output.
     # -F : Append indicator (one of */=>@|) to entries.
