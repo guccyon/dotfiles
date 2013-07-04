@@ -45,6 +45,7 @@ case ${UID} in
   ;;
 esac
 
+
 ## assist command option ##################
 fpath=(~/.zsh/functions/Completion ${fpath})
 fpath=(~/.zsh/zsh-completions/src $fpath)
@@ -75,7 +76,9 @@ setopt autopushd
 setopt pushdignoredups
 setopt pushdminus
 
-chpwd_functions+=(ls_abbrev)
+chpwd_functions=(ls_abbrev)
+zle -N do_enter
+bindkey '^m' do_enter
 
 ## history ##################################
 HISTFILE=~/.zsh/history
@@ -95,9 +98,19 @@ bindkey "\\ep" history-beginning-search-backward-end
 bindkey "\\en" history-beginning-search-forward-end
 function history-all { history -E 1 }
 
-## 
+## vcs ######################################
+autoload -Uz vcs_info
+BASE_FORMAT="%{$fg_bold[yellow]%}%n@%m"
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' formats ':%{'${fg[red]}'%}(%s)%b%{'$reset_color'%}'
 
-## zsh-syntax-highlighting ##################################
+setopt prompt_subst
+precmd () {
+  LANG=en_US.UTF-8 vcs_info
+  PROMPT='%{$fg_bold[white]%}$BASE_FORMAT${vcs_info_msg_0_}%{$fg_bold[white]%}%%%{$reset_color%} '
+}
+
+## zsh-syntax-highlighting ##################
 if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
@@ -143,7 +156,7 @@ function ls_abbrev() {
     # -F : Append indicator (one of */=>@|) to entries.
     local cmd_ls='ls'
     local -a opt_ls
-    opt_ls=('-aCF' '--color=always')
+    opt_ls=('-CF' '--color=always')
     case "${OSTYPE}" in
         freebsd*|darwin*)
             if type gls > /dev/null 2>&1; then
@@ -186,7 +199,5 @@ function do_enter() {
     zle reset-prompt
     return 0
 }
-zle -N do_enter
-bindkey '^m' do_enter
 
 [ -f ~/.zsh/zshrc.mine ] && source ~/.zsh/zshrc.mine
