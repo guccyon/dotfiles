@@ -102,7 +102,8 @@ function history-all { history -E 1 }
 autoload -Uz vcs_info
 BASE_FORMAT="%{$fg_bold[yellow]%}%n@%m"
 zstyle ':vcs_info:*' enable git svn
-zstyle ':vcs_info:*' formats ':%{'${fg[red]}'%}(%s)%b%{'$reset_color'%}'
+zstyle ':vcs_info:*' formats ':%{'$fg[red]'%}(%s)%b%{'$reset_color'%}'
+zstyle ':vcs_info:git:*' actionformats ':%{'$fg[red]'%}(%s)%c%u%b<%a>'
 
 setopt prompt_subst
 precmd () {
