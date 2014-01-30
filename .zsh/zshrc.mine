@@ -2,6 +2,7 @@
 ## HomeBrew
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 
 ## RVM
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then
@@ -33,6 +34,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 #fi
 
+## Java
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 ##export PATH=~/Library/appengine-java-sdk/bin:$PATH
 
 ### aliaces specific ##############################
@@ -61,6 +65,9 @@ alias ql='qlmanage -p "$@" >& /dev/null'
 #alias emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
 #alias emacs=/usr/local/Cellar/emacs/23.3/Emacs.app/Contents/MacOS/Emacs -nw
 
+alias gosh='rlwrap gosh'
+
+[ -f ~/.zsh/functions/work_functions ] && source ~/.zsh/functions/work_functions
 
 
 nprom () {

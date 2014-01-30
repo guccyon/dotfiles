@@ -25,5 +25,5 @@
     dc = diff --cached
     gr = grep
 [core]
-	excludesfile = /Users/tetsu/.gitignore
+	excludesfile = ~/.gitignore
 	whitespace = cr-at-eol

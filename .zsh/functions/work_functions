@@ -1,0 +1,28 @@
+gitbr () {
+	git fetch origin
+	git co -b "$1" origin/master
+	git subup
+	xcode
+}
+
+gitgc () {
+	git remote prune origin
+	git gc
+}
+
+gitcoo () {
+	git fetch origin
+	git co "origin/$1"
+	git subup
+	xcode
+}
+
+xcode () {
+    if ls *.xcworkspace > /dev/null 2>&1
+    then
+        find . -maxdepth 1 -name '*.xcworkspace' -exec open '{}' \;
+    elif ls *.xcodeproj > /dev/null 2>&1
+    then
+        find . -maxdepth 1 -name '*.xcodeproj' -exec open '{}' \;
+    fi
+}

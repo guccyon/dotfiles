@@ -5,6 +5,7 @@
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export LESS="-R"
+export SHELL=/bin/zsh
 
 #export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 if [ -e $HOME/bin ]; then
@@ -47,10 +48,10 @@ esac
 
 
 ## assist command option ##################
-fpath=(~/.zsh/functions/Completion ${fpath})
+fpath=(~/.zsh/functions/Completion $fpath)
 fpath=(~/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit
-compinit -d ~/.zsh/zcompdump
+compinit
 setopt list_packed
 setopt list_types
   
@@ -202,3 +203,6 @@ function do_enter() {
 }
 
 [ -f ~/.zsh/zshrc.mine ] && source ~/.zsh/zshrc.mine
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator ]] && source /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator
