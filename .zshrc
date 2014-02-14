@@ -148,7 +148,9 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias src='source'
 alias diff='colordiff'
+alias b2dc='boot2docker'
 
+umask 0002
 
 ## functions ################################
 
