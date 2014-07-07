@@ -206,5 +206,4 @@ function do_enter() {
 
 [ -f ~/.zsh/zshrc.mine ] && source ~/.zsh/zshrc.mine
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator ]] && source /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator
