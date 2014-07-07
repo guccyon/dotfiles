@@ -37,13 +37,6 @@ fi
 #export GOBIN=$HOME/opt/bin
 #export PATH=$GOBIN:$PATH
 
-## MAMP
-#if [ -s "/Applications/MAMP" ]; then
-#export PATH=/Applications/MAMP/Library/bin:$PATH
-#export PATH=/Applications/MAMP/bin/php/php5.3.6/bin:$PATH
-#export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
-#fi
-
 ## Java
 export JAVA_HOME=$(/usr/libexec/java_home)
 
