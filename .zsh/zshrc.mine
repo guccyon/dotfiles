@@ -42,6 +42,11 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 
 ##export PATH=~/Library/appengine-java-sdk/bin:$PATH
 
+## tmuxinator
+if [ -s $HOME/.tmuxinator/scripts/tmuxinator ]; then
+    source $HOME/.tmuxinator/scripts/tmuxinator
+fi
+
 ### aliaces specific ##############################
 alias vi='/usr/bin/vim'
 #alias javac='javac -J-Dfile.encoding=UTF-8'
