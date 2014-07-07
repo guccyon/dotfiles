@@ -27,3 +27,10 @@
 [core]
 	excludesfile = ~/.gitignore
 	whitespace = cr-at-eol
+[merge]
+    ff = false
+[branch "master"]
+	rebase = true
+[ghq]
+	root = ~/src
+	root = ~/dev
