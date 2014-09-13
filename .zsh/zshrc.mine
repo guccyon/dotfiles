@@ -1,4 +1,17 @@
+## options
+setopt nolistbeep
+setopt auto_menu
+setopt auto_list
+setopt auto_param_keys
+setopt auto_param_slash
+setopt correct
+setopt interactive_comments
+
+
 ### environment for mac ##########################
+export PATH=$HOME/bin:$PATH
+export EDITOR=vi
+
 ## HomeBrew
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
@@ -21,6 +34,12 @@ if [ -x "`which go`" ]; then
   export GOROOT=`go env GOROOT`
   export GOPATH=$HOME
   export PATH=$PATH:$GOROOT/bin
+fi
+
+## phpenv
+if which phpenv > /dev/null; then
+    export PATH="$HOME/.phpenv/bin:$PATH"
+    eval "$(phpenv init - zsh)"
 fi
 
 #export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home/
@@ -74,6 +93,8 @@ alias ql='qlmanage -p "$@" >& /dev/null'
 #alias emacs=/usr/local/Cellar/emacs/23.3/Emacs.app/Contents/MacOS/Emacs -nw
 
 alias gosh='rlwrap gosh'
+
+alias -g BR='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 
 [ -f ~/.zsh/functions/work_functions ] && source ~/.zsh/functions/work_functions
 

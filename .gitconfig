@@ -31,6 +31,8 @@
     ff = false
 [branch "master"]
 	rebase = true
+[branch "develop"]
+	rebase = true
 [ghq]
 	root = ~/src
 	root = ~/dev
