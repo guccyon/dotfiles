@@ -29,11 +29,23 @@ if which rbenv > /dev/null; then
     eval "$(rbenv init - zsh)"
 fi
 
+## Pyenv
+if which pyenv > /dev/null; then
+  export PYENV_ROOT=/usr/local/var/pyenv
+  eval "$(pyenv init -)";
+fi
+
 ## Golang
 if [ -x "`which go`" ]; then
   export GOROOT=`go env GOROOT`
   export GOPATH=$HOME
   export PATH=$PATH:$GOROOT/bin
+fi
+
+## node
+if [ -d ~/.nodebrew ]; then
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+  fpath=(/usr/local/share/zsh/site-functions $fpath)
 fi
 
 ## phpenv
@@ -72,6 +84,7 @@ alias vi='/usr/bin/vim'
 #alias java='java -Dfile.encoding=UTF-8'
 
 alias ql='qlmanage -p "$@" >& /dev/null'
+alias be='bundle exec'
 #alias less='/usr/share/vim/vim72/macros/less.sh'
 #
 #Aliass emacs='emacs -nw'
@@ -97,7 +110,7 @@ alias gosh='rlwrap gosh'
 alias -g BR='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 
 [ -f ~/.zsh/functions/work_functions ] && source ~/.zsh/functions/work_functions
-
+[ -f ~/.zsh/functions/utils ] && source ~/.zsh/functions/utils
 
 nprom () {
     setopt prompt_subst
