@@ -204,6 +204,13 @@ function do_enter() {
     return 0
 }
 
+# Customize to your needs...
+if [[ -f ~/.zsh/antigen/antigen.zsh ]]; then
+  source ~/.zsh/antigen/antigen.zsh
+  [ -f ~/.zsh/plugins.antigen ] && source ~/.zsh/plugins.antigen
+  antigen apply
+fi
+
 [ -f ~/.zsh/zshrc.mine ] && source ~/.zsh/zshrc.mine
 
 [[ -s /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator ]] && source /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator
