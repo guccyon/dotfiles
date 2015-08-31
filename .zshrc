@@ -36,12 +36,12 @@ case ${UID} in
   RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
   ;;
   *)
-  PROMPT="%{$fg_bold[blue]%}%n@%m%{$fg_bold[white]%}%%%{$reset_color%} "  
+  PROMPT="%{$fg_bold[blue]%}%n@%m%{$fg_bold[white]%}%%%{$reset_color%} "
   PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
   #PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
   RPROMPT="%{${fg[green]}%}[%~]%{${reset_color}%}"
   SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
+  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
           PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
   ;;
 esac
@@ -54,8 +54,8 @@ autoload -Uz compinit
 compinit
 setopt list_packed
 setopt list_types
-  
-## zstyle ############### 
+
+## zstyle ###############
 zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
@@ -72,14 +72,10 @@ bindkey -e # emacs keybind
 #bindkey -v # vi keybind
 
 ## changing directory #######################
-setopt auto_cd 
+setopt auto_cd
 setopt autopushd
 setopt pushdignoredups
 setopt pushdminus
-
-chpwd_functions=(ls_abbrev)
-zle -N do_enter
-bindkey '^m' do_enter
 
 ## history ##################################
 HISTFILE=~/.zsh/history
@@ -107,22 +103,13 @@ zstyle ':vcs_info:*' formats ':%{'$fg[red]'%}(%s)%b%{'$reset_color'%}'
 zstyle ':vcs_info:git:*' actionformats ':%{'$fg[red]'%}(%s)%c%u%b<%a>'
 
 setopt prompt_subst
-precmd () {
-  LANG=en_US.UTF-8 vcs_info
-  PROMPT='%{$fg_bold[white]%}$BASE_FORMAT${vcs_info_msg_0_}%{$fg_bold[white]%}%%%{$reset_color%} '
-}
-
-## zsh-syntax-highlighting ##################
-if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 ## editor ###################################
 autoload zed
 
 
 ## options ##################################
-setopt nolistbeep 
+setopt nolistbeep
 setopt nobeep
 setopt auto_menu
 setopt auto_list
@@ -131,11 +118,11 @@ setopt auto_param_slash
 setopt correct
 setopt noautoremoveslash
 setopt interactive_comments  # コマンドラインでも # 以降をコメントと見なす
+setopt complete_aliases
 
 
 ## aliases ##################################
-setopt complete_aliases
-alias ls="ls -G -v -F --color=auto"
+# alias ls="ls -G -v -F --color=auto"
 alias la="ls -a"
 alias lf="ls -F"
 alias ll='ls -l'
@@ -148,61 +135,8 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias src='source'
 alias diff='colordiff'
-alias b2dc='boot2docker'
 
 umask 0002
-
-## functions ################################
-
-function ls_abbrev() {
-    # -a : Do not ignore entries starting with ..
-    # -C : Force multi-column output.
-    # -F : Append indicator (one of */=>@|) to entries.
-    local cmd_ls='ls'
-    local -a opt_ls
-    opt_ls=('-CF' '--color=always')
-    case "${OSTYPE}" in
-        freebsd*|darwin*)
-            if type gls > /dev/null 2>&1; then
-                cmd_ls='gls'
-            else
-                # -G : Enable colorized output.
-                opt_ls=('-aCFG')
-            fi
-            ;;
-    esac
-
-    local ls_result
-    ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]} | sed $'/^\e\[[0-9;]*m$/d')
-
-    local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
-
-    if [ $ls_lines -gt 10 ]; then
-        echo "$ls_result" | head -n 5
-        echo '...'
-        echo "$ls_result" | tail -n 5
-        echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
-    else
-        echo "$ls_result"
-    fi
-}
-
-function do_enter() {
-    if [ -n "$BUFFER" ]; then
-        zle accept-line
-        return 0
-    fi
-    echo
-    ls
-    # ls_abbrev
-    if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]; then
-        echo
-        echo -e "\e[0;33m--- git status ---\e[0m"
-        git status -sb
-    fi
-    zle reset-prompt
-    return 0
-}
 
 # Customize to your needs...
 if [[ -f ~/.zsh/antigen/antigen.zsh ]]; then

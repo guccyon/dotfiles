@@ -83,6 +83,12 @@ if [ -s $HOME/.tmuxinator/scripts/tmuxinator ]; then
     source $HOME/.tmuxinator/scripts/tmuxinator
 fi
 
+## zsh-syntax-highlighting ##################
+if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+
 ### aliaces specific ##############################
 alias vi='/usr/bin/vim'
 #alias javac='javac -J-Dfile.encoding=UTF-8'
@@ -90,6 +96,7 @@ alias vi='/usr/bin/vim'
 
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias be='bundle exec'
+alias b2dc='boot2docker'
 #alias less='/usr/share/vim/vim72/macros/less.sh'
 #
 #Aliass emacs='emacs -nw'
@@ -114,26 +121,16 @@ alias gosh='rlwrap gosh'
 
 alias -g BR='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 
-[ -f ~/.zsh/functions/work_functions ] && source ~/.zsh/functions/work_functions
 [ -f ~/.zsh/functions/utils ] && source ~/.zsh/functions/utils
 
-# bindkey
-bindkey '^xg' anyframe-widget-cd-ghq-repository
+## changing directory #######################
+chpwd_functions=(ls_abbrev)
+zle -N do_enter
 
-nprom () {
-    setopt prompt_subst
-    local rbase=$'%{\e[33m%}[%~]%{\e[m%}' lf=$'\n'
-    local pct=$'%0(?||%18(?||%{\e[31m%}))%#%{\e[m%}'
-    RPROMPT="%9(~||$rbase)"
-    case "$USER" in
-        yatex)    PROMPT=$'%{\e[33m%}%U%m{%n}%%%{\e[m%}%u ' ;;
-        java)     PROMPT=$'%{\e[36m%}%U%m{%n}%%%{\e[m%}%u ' ;;
-        *)
-            local pbase=$'%{\e[$[32+RANDOM%5]m%}%B%n@%m%b'"$pct "
-            PROMPT="%9(~|$rbase$lf|)$pbase"
-            ;;
-    esac
-    [[ "$TERM" = "screen" ]] && RPROMPT="[%~]"
-}
+# bindkey
+bindkey '^m' do_enter
+bindkey '^xg' anyframe-widget-cd-ghq-repository
+bindkey '^]' peco-src
+
 
 #nprom
