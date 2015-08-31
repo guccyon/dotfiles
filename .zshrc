@@ -213,4 +213,3 @@ fi
 
 [ -f ~/.zsh/zshrc.mine ] && source ~/.zsh/zshrc.mine
 
-[[ -s /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator ]] && source /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator
