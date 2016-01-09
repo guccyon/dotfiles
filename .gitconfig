@@ -24,6 +24,7 @@
     hist = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
     dc = diff --cached
     gr = grep
+    subup = submodule foreach 'git pull origin master'
 [core]
 	excludesfile = ~/.gitignore
 	whitespace = cr-at-eol
