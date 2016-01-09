@@ -1,38 +1,38 @@
-## options
-setopt nolistbeep
-setopt auto_menu
-setopt auto_list
-setopt auto_param_keys
-setopt auto_param_slash
-setopt correct
-setopt interactive_comments
-
-
-### environment for mac ##########################
-export PATH=$HOME/bin:$PATH
+### Generic Environment ##########################
+if [ -e $HOME/bin ]; then
+    export PATH=$HOME/bin:$PATH
+fi
+if [ -e /usr/local/bin ]; then
+  export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+fi
 export EDITOR=vi
+export LANG=ja_JP.UTF-8
+export EDITOR=vi
+export LESS="-R"
+export SHELL=/bin/zsh
+
+
+### Package Specific Environment #################
 
 ## HomeBrew
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
-fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
-
-## RVM
-if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-    source "$HOME/.rvm/scripts/rvm"
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+if [ -x "`which brew`" ]; then
+  export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+  fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 
-## Rbenv
-if which rbenv > /dev/null; then
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init - zsh)"
+## Direnv
+if which direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
 fi
 
-## Pyenv
-if which pyenv > /dev/null; then
-  export PYENV_ROOT=/usr/local/var/pyenv
-  eval "$(pyenv init -)";
+## Anyenv
+if [ -d $HOME/.anyenv ] ; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init - zsh)"
+  for D in `\ls $HOME/.anyenv/envs`
+  do
+    export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+  done
 fi
 
 ## Golang
@@ -42,95 +42,87 @@ if [ -x "`which go`" ]; then
   export PATH=$PATH:$GOROOT/bin
 fi
 
-## node
-if [ -d ~/.nodebrew ]; then
-  export PATH=$HOME/.nodebrew/current/bin:$PATH
-  fpath=(/usr/local/share/zsh/site-functions $fpath)
+if [ -d ~/node_modules/.bin ]; then
+  export PATH=$HOME/node_modules/.bin:$PATH
 fi
 
-## phpenv
-if which phpenv > /dev/null; then
-    export PATH="$HOME/.phpenv/bin:$PATH"
-    eval "$(phpenv init - zsh)"
+## haskell
+if which stack > /dev/null; then
+  alias ghc="stack ghc"
+  alias ghci="stack ghci"
+  alias runghc="stack runghc"
 fi
 
-## tmuxinator
-if [ -s /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator ]; then
-    source /Users/tetsuageetcom/.tmuxinator/scripts/tmuxinator
+## Docker
+#if [ -x "`which docker`" ]; then
+if which docker > /dev/null; then
+  eval $(docker-machine env default)
+  alias dl='docker ps -l -q'
 fi
-
-#export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home/
-#export RSENSE_HOME=~/opt/rsense-0.2
-
-## Android
-#export ANDROID_HOME=~/Library/android-sdk
-#export PATH=$PATH:$ANDROID_HOME/tools
-
-## Go language
-#export GOROOT=$HOME/opt/go
-#export GOOS=darwin
-#export GOARCH=amd64
-#export GOBIN=$HOME/opt/bin
-#export PATH=$GOBIN:$PATH
 
 ## Java
 export JAVA_HOME=$(/usr/libexec/java_home)
 
-##export PATH=~/Library/appengine-java-sdk/bin:$PATH
-
 ## tmuxinator
 if [ -s $HOME/.tmuxinator/scripts/tmuxinator ]; then
-    source $HOME/.tmuxinator/scripts/tmuxinator
+  source $HOME/.tmuxinator/scripts/tmuxinator
 fi
 
 ## zsh-syntax-highlighting ##################
-if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+# if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+#   source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# fi
 
+### Options ###############################
+setopt nolistbeep
+setopt auto_menu
+setopt auto_list
+setopt auto_param_keys
+setopt auto_param_slash
+setopt correct
+setopt list_types
+setopt list_packed
+setopt long_list_jobs
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_no_store
+setopt share_history
+setopt interactive_comments
+setopt pushd_ignore_dups
+setopt print_eight_bit
+
+### Functions #############################
+[ -f ~/.zsh/functions/utils.sh ] && source ~/.zsh/functions/utils.sh
+[ -f ~/.zsh/functions/utils_git.sh ] && source ~/.zsh/functions/utils_git.sh
+[ -f ~/.zsh/functions/utils_peco.sh ] && source ~/.zsh/functions/utils_peco.sh
+
+chpwd_functions=(ls_abbrev)
+
+### Key Bindings ##########################
+bindkey -e
+# bindkey '^m' do_enter
+bindkey '^r' peco-select-history
+# bindkey '^xg' anyframe-widget-cd-ghq-repository
+bindkey '^xg' peco-ghq-src
+bindkey '^xb' peco-git-branch
+bindkey '^xf' peco-find-file
 
 ### aliaces specific ##############################
 alias vi='/usr/bin/vim'
-#alias javac='javac -J-Dfile.encoding=UTF-8'
-#alias java='java -Dfile.encoding=UTF-8'
+alias javac='javac -J-Dfile.encoding=UTF-8'
+alias java='java -Dfile.encoding=UTF-8'
 
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias be='bundle exec'
-alias b2dc='boot2docker'
-#alias less='/usr/share/vim/vim72/macros/less.sh'
-#
-#Aliass emacs='emacs -nw'
-#alias euler='cd ~/Documents/programing/euler'
-#alias game='cd ~/Documents/programing/game_study'
-#RHINO_JAR=~/Library/rhino1_7R2/js.jar
-
-#alias NICT='~/Documents/work/NICT'
-#alias infonic='~/Documents/works/infonic'
-[ -s $HOME/Business/ageet ] && alias ageet='~/Business/ageet'
-[ -s $HOME/Business/kyoto-u ] && alias kyoto-u='~/Business/kyoto-u'
-
-#alias js='java -jar $RHINO_JAR'
-#alias mysql.server='sudo /opt/local/share/mysql5/mysql/mysql.server'
-#alias updateports="sudo port selfupdate; sudo port outdated"
-#alias portupgrade="sudo port upgrade installed"
-#alias emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs -nw'
-#alias emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
-#alias emacs=/usr/local/Cellar/emacs/23.3/Emacs.app/Contents/MacOS/Emacs -nw
-
-alias gosh='rlwrap gosh'
 
 alias -g BR='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
+alias la="ls -a"
+alias lf="ls -F"
+alias gd='dirs -v; echo -n "select number: "; read newdir; cd -"$newdir"'
+alias grep="egrep --color=always"
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias src='source'
+alias diff='colordiff'
 
-[ -f ~/.zsh/functions/utils ] && source ~/.zsh/functions/utils
-
-## changing directory #######################
-chpwd_functions=(ls_abbrev)
-zle -N do_enter
-
-# bindkey
-bindkey '^m' do_enter
-bindkey '^xg' anyframe-widget-cd-ghq-repository
-bindkey '^]' peco-src
-
-
-#nprom

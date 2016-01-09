@@ -3,6 +3,13 @@
 *.sublime-workspace
 .zsh/history
 .zsh/zcompdump
+.zsh/zshrc.local
 .subversion
 .gitconfig
 .ssh
+.bundle
+ssh_config
+hosts
+
+config/secrets.yml.sample
+.envrc

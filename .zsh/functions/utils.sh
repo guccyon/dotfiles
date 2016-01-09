@@ -1,4 +1,4 @@
-dropbox_remove_conflict() {
+function dropbox_remove_conflict() {
   find ~/Dropbox/ -name "*conflict*" -exec rm {} \;
 }
 
@@ -36,6 +36,7 @@ function ls_abbrev() {
 }
 
 
+
 function do_enter() {
   if [ -n "$BUFFER" ]; then
     zle accept-line
@@ -52,42 +53,9 @@ function do_enter() {
   zle reset-prompt
   return 0
 }
+zle -N do_enter
 
-nprom () {
-    setopt prompt_subst
-    local rbase=$'%{\e[33m%}[%~]%{\e[m%}' lf=$'\n'
-    local pct=$'%0(?||%18(?||%{\e[31m%}))%#%{\e[m%}'
-    RPROMPT="%9(~||$rbase)"
-    case "$USER" in
-        yatex)    PROMPT=$'%{\e[33m%}%U%m{%n}%%%{\e[m%}%u ' ;;
-        java)     PROMPT=$'%{\e[36m%}%U%m{%n}%%%{\e[m%}%u ' ;;
-        *)
-            local pbase=$'%{\e[$[32+RANDOM%5]m%}%B%n@%m%b'"$pct "
-            PROMPT="%9(~|$rbase$lf|)$pbase"
-            ;;
-    esac
-    [[ "$TERM" = "screen" ]] && RPROMPT="[%~]"
-}
-gitbr () {
-	git fetch origin
-	git co -b "$1" origin/master
-	git subup
-	xcode
-}
-
-gitgc () {
-	git remote prune origin
-	git gc
-}
-
-gitcoo () {
-	git fetch origin
-	git co "origin/$1"
-	git subup
-	xcode
-}
-
-xcode () {
+function xcode () {
     if ls *.xcworkspace > /dev/null 2>&1
     then
         find . -maxdepth 1 -name '*.xcworkspace' -exec open '{}' \;
@@ -95,35 +63,4 @@ xcode () {
     then
         find . -maxdepth 1 -name '*.xcodeproj' -exec open '{}' \;
     fi
-}
-
-function peco-src () {
-    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-src
-
-
-function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(history -n 1 | \
-        eval $tac | \
-        peco --query "$LBUFFER")
-    CURSOR=$#BUFFER
-    zle clear-screen
-}
-zle -N peco-select-history
-
-precmd () {
-  LANG=en_US.UTF-8 vcs_info
-  PROMPT='%{$fg_bold[white]%}$BASE_FORMAT${vcs_info_msg_0_}%{$fg_bold[white]%}%%%{$reset_color%} '
 }
