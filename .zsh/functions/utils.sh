@@ -12,7 +12,7 @@ function ls_abbrev() {
     case "${OSTYPE}" in
         freebsd*|darwin*)
             if type gls > /dev/null 2>&1; then
-                cmd_ls='gls'
+                cmd_ls='ls'
             else
                 # -G : Enable colorized output.
                 opt_ls=('-aCFG')

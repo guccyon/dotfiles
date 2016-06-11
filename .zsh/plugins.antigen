@@ -1,3 +1,2 @@
 antigen bundle mollifier/anyframe
-antigen bundle zsh-users/zsh-completions
-antigen apply
+antigen bundle zsh-users/zsh-completions src

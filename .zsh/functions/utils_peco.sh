@@ -59,3 +59,11 @@ function peco-find-file() {
     zle redisplay
 }
 zle -N peco-find-file
+
+function docker-ps() {
+    docker ps --format "{{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Command}}\t{{.RunningFor}}"
+}
+
+function peco-docker-exec() {
+    docker exec -it `docker-ps| peco | cut -d" " -f 1` /bin/bash
+}

@@ -17,6 +17,9 @@ export SHELL=/bin/zsh
 ## HomeBrew
 if [ -x "`which brew`" ]; then
   export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+  if [ -d $(brew --prefix)/share/zsh-completions ]; then
+    fpath=($(brew --prefix)/share/zsh-completions $fpath)
+  fi
   fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 
@@ -54,11 +57,20 @@ if which stack > /dev/null; then
 fi
 
 ## Docker
-#if [ -x "`which docker`" ]; then
 if which docker > /dev/null; then
   eval $(docker-machine env default)
   alias dl='docker ps -l -q'
+  alias dui='docker images -q -f dangling=true'
+  alias dps='docker ps --format "{{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Command}}\t{{.RunningFor}}"'
+  alias dexec='docker exec -it `dps| peco | cut -f 1` bash'
+  alias dclogs='docker-compose logs -f'
 fi
+
+## Ansible
+#if which ansible > /dev/null; then
+#  alias ansible-vault-create='ansible-vault --vault-password-file .ansible_vault_key create'
+#  alias ansible-vault-edit='ansible-vault --vault-password-file .ansible_vault_key edit'
+#fi
 
 ## Java
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -83,20 +95,21 @@ setopt correct
 setopt list_types
 setopt list_packed
 setopt long_list_jobs
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_no_store
-setopt share_history
 setopt interactive_comments
 setopt pushd_ignore_dups
 setopt print_eight_bit
 
-### Functions #############################
-[ -f ~/.zsh/functions/utils.sh ] && source ~/.zsh/functions/utils.sh
-[ -f ~/.zsh/functions/utils_git.sh ] && source ~/.zsh/functions/utils_git.sh
-[ -f ~/.zsh/functions/utils_peco.sh ] && source ~/.zsh/functions/utils_peco.sh
+### Histroy ###############################
+[ -f ~/.zsh/zshrc.history ] && source ~/.zsh/zshrc.history
 
-chpwd_functions=(ls_abbrev)
+### Functions #############################
+for i in ~/.zsh/functions/utils*; do
+  source $i
+done
+
+# chpwd_functions=(ls_abbrev)
+
+autoload -Uz zmv
 
 ### Key Bindings ##########################
 bindkey -e
@@ -125,4 +138,6 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias src='source'
 alias diff='colordiff'
+alias zmv='noglob zmv -W'
+alias ap='ansible-playbook'
 

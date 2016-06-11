@@ -8,7 +8,7 @@
 .gitconfig
 .ssh
 .bundle
-ssh_config
+#ssh_config
 hosts
 
 config/secrets.yml.sample
