@@ -2,7 +2,7 @@
 
 dir=$(cd $(dirname $0) && pwd)
 dotfiles=`ls -a $dir|grep "^\.[^.]"`
-excepts=(.git)
+excepts=(.git .screenrc .subversion .inputrc)
 IFS=$'\n'
 
 
