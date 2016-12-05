@@ -1,4 +1,0 @@
-zplug "felixr/docker-zsh-completion"
-zplug "zsh-users/zsh-completions"
-zplug "mollifier/anyframe"
-zplug load

@@ -1,0 +1,12 @@
+setopt nolistbeep
+setopt auto_menu
+setopt auto_list
+setopt auto_param_keys
+setopt auto_param_slash
+setopt correct
+setopt list_types
+setopt list_packed
+setopt long_list_jobs
+setopt interactive_comments
+setopt pushd_ignore_dups
+setopt print_eight_bit

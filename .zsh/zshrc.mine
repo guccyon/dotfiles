@@ -17,9 +17,6 @@ export SHELL=/bin/zsh
 ## HomeBrew
 if [ -x "`which brew`" ]; then
   export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
-  if [ -d $(brew --prefix)/share/zsh-completions ]; then
-    fpath=($(brew --prefix)/share/zsh-completions $fpath)
-  fi
   fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 
@@ -45,11 +42,12 @@ if [ -x "`which go`" ]; then
   export PATH=$PATH:$GOROOT/bin
 fi
 
+## Node
 if [ -d ~/node_modules/.bin ]; then
   export PATH=$HOME/node_modules/.bin:$PATH
 fi
 
-## haskell
+## Haskell
 if which stack > /dev/null; then
   alias ghc="stack ghc"
   alias ghci="stack ghci"
@@ -59,11 +57,6 @@ fi
 ## Docker
 if which docker > /dev/null; then
   eval $(docker-machine env default)
-  alias dl='docker ps -l -q'
-  alias dui='docker images -q -f dangling=true'
-  alias dps='docker ps --format "{{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Command}}\t{{.RunningFor}}"'
-  alias dexec='docker exec -it `dps| peco | cut -f 1` bash'
-  alias dclogs='docker-compose logs -f'
 fi
 
 ## Ansible
@@ -86,18 +79,7 @@ fi
 # fi
 
 ### Options ###############################
-setopt nolistbeep
-setopt auto_menu
-setopt auto_list
-setopt auto_param_keys
-setopt auto_param_slash
-setopt correct
-setopt list_types
-setopt list_packed
-setopt long_list_jobs
-setopt interactive_comments
-setopt pushd_ignore_dups
-setopt print_eight_bit
+[ -f ~/.zsh/zshrc.options ] && source ~/.zsh/zshrc.options
 
 ### Histroy ###############################
 [ -f ~/.zsh/zshrc.history ] && source ~/.zsh/zshrc.history
@@ -120,24 +102,5 @@ bindkey '^xg' peco-ghq-src
 bindkey '^xb' peco-git-branch
 bindkey '^xf' peco-find-file
 
-### aliaces specific ##############################
-alias vi='/usr/bin/vim'
-alias javac='javac -J-Dfile.encoding=UTF-8'
-alias java='java -Dfile.encoding=UTF-8'
-
-alias ql='qlmanage -p "$@" >& /dev/null'
-alias be='bundle exec'
-
-alias -g BR='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
-alias la="ls -a"
-alias lf="ls -F"
-alias gd='dirs -v; echo -n "select number: "; read newdir; cd -"$newdir"'
-alias grep="egrep --color=always"
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
-alias src='source'
-alias diff='colordiff'
-alias zmv='noglob zmv -W'
-alias ap='ansible-playbook'
-
+### aliases specific ##############################
+[ -f ~/.zsh/zshrc.aliases ] && source ~/.zsh/zshrc.aliases
