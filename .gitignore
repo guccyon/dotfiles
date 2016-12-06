@@ -7,7 +7,7 @@
 .subversion
 .gitconfig
 .ssh
-.bundle
+.bundle/cache
 #ssh_config
 hosts
 

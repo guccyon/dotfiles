@@ -1,0 +1,9 @@
+---
+BUNDLE_BUILD__PG: "--with-pg-config=/usr/local/Cellar/postgresql/9.4.4/bin/pg_config"
+BUNDLE_PATH: ".bundle"
+BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries"
+BUNDLE_BUILD__MYSQL2: "--use-system-libraries"
+BUNDLE_BUILD__SQLITE3: "--use-system-libraries"
+BUNDLE_GEM__TEST: rspec
+BUNDLE_GEM__MIT: true
+BUNDLE_GEM__COC: true
