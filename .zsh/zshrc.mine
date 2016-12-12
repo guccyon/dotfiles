@@ -98,7 +98,7 @@ bindkey -e
 # bindkey '^m' do_enter
 bindkey '^r' peco-select-history
 # bindkey '^xg' anyframe-widget-cd-ghq-repository
-bindkey '^xg' peco-ghq-src
+bindkey '^]' peco-ghq-src
 bindkey '^xb' peco-git-branch
 bindkey '^xf' peco-find-file
 
