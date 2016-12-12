@@ -2,6 +2,7 @@
 *.sublime-project
 *.sublime-workspace
 .zsh/history
+.zsh/.zhistory
 .zsh/zcompdump
 .zsh/zshrc.local
 .subversion

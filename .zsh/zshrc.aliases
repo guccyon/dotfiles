@@ -6,6 +6,8 @@ alias ql='qlmanage -p "$@" >& /dev/null'
 alias be='bundle exec'
 
 alias -g BR='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
+alias ls="ls -G"
+alias ll="ls -l"
 alias la="ls -a"
 alias lf="ls -F"
 alias gd='dirs -v; echo -n "select number: "; read newdir; cd -"$newdir"'
@@ -18,7 +20,14 @@ alias diff='colordiff'
 alias zmv='noglob zmv -W'
 alias ap='ansible-playbook'
 
+## Haskell
+if which stack > /dev/null; then
+  alias ghc="stack ghc"
+  alias ghci="stack ghci"
+  alias runghc="stack runghc"
+fi
 
+## Docker
 if which docker > /dev/null; then
   alias dl='docker ps -l -q'
   alias dui='docker images -q -f dangling=true'
