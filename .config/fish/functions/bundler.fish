@@ -1,0 +1,1 @@
+/Users/dank1_higuchi/.config/fisherman/bundler/bundler.fish

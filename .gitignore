@@ -11,5 +11,7 @@
 #ssh_config
 hosts
 
+.config/direnv
+
 config/secrets.yml.sample
 .envrc
