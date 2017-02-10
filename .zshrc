@@ -23,7 +23,8 @@ if [ -f ~/.zplug/init.zsh ]; then
 		fi
 	fi
 
-	zplug load --verbose
+#	zplug load --verbose
+	zplug load
 fi
 
 [ -e $HOME/bin ] && export PATH=$HOME/bin:$PATH

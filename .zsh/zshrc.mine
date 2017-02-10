@@ -13,15 +13,8 @@ if which direnv > /dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-## Anyenv
-if [ -d $HOME/.anyenv ] ; then
-  export PATH="$HOME/.anyenv/bin:$PATH"
-  eval "$(anyenv init - zsh)"
-  for D in `\ls $HOME/.anyenv/envs`
-  do
-    export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
-  done
-fi
+## Rbenv
+[ -x "`which rbenv`" ] && eval "$(rbenv init - zsh)"
 
 ## Golang
 if [ -x "`which go`" ]; then

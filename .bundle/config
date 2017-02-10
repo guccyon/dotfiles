@@ -4,6 +4,7 @@ BUNDLE_PATH: ".bundle"
 BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries"
 BUNDLE_BUILD__MYSQL2: "--use-system-libraries"
 BUNDLE_BUILD__SQLITE3: "--use-system-libraries"
-BUNDLE_GEM__TEST: rspec
-BUNDLE_GEM__MIT: true
-BUNDLE_GEM__COC: true
+BUNDLE_GEM__TEST: "rspec"
+BUNDLE_GEM__MIT: "true"
+BUNDLE_GEM__COC: "true"
+BUNDLE_BUILD__LIBV8: "--with-system-v8"

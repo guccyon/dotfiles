@@ -36,3 +36,7 @@ if which docker > /dev/null; then
   alias dclogs='docker-compose logs -f'
   alias drun='docker run --rm -it'
 fi
+
+if which tmuxinator > /dev/null; then
+  alias mux='tmuxinator'
+fi

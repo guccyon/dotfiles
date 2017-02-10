@@ -14,7 +14,7 @@ function rails-container() {
     echo '$contaigner-name must be required!'
     name=$(basename `pwd`)
   fi
-  docker run -it -p 3000:3000 -v `pwd`:/var/app -w /var/app --name $name tetsu/rails /bin/bash
+  docker run -it -p 3000:3000 -v `pwd`:/var/app -w /var/app --name $name ruby /bin/bash
 }
 
 function dcrun() {
