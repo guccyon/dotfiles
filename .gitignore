@@ -16,3 +16,5 @@ hosts
 
 config/secrets.yml.sample
 .envrc
+
+.ansible_vault_key

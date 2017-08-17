@@ -28,5 +28,6 @@ SET fish_pager_color_completion:\x1d
 SET fish_pager_color_description:B3A06D\x1eyellow
 SET fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SET fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SET_EXPORT fish_user_paths:/Users/dank1_higuchi/\x2enodebrew/current/bin\x1e/usr/local/sbin
 SET fisher_active_prompt:robbyrussell
-SET fisher_dependency_count:peco\x1erobbyrussell\x1edocker\x2dcompletion\x1eansible\x2dcompletion\x1erbenv\x1epyenv\x1ebundler\x1ebalias\x1eaws
+SET fisher_dependency_count:peco\x1erobbyrussell\x1eansible\x2dcompletion\x1erbenv\x1epyenv\x1ebundler\x1ebalias\x1eaws\x1edocker\x2dcompletion

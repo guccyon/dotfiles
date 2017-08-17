@@ -28,13 +28,10 @@ if [ -d ~/node_modules/.bin ]; then
   export PATH=$HOME/node_modules/.bin:$PATH
 fi
 
-## Docker
-if which docker > /dev/null; then
-  eval $(docker-machine env default)
-fi
-
 ## Java
-export JAVA_HOME=$(/usr/libexec/java_home)
+if [ -x "`which java`" ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 ## tmuxinator
 if [ -s $HOME/.tmuxinator/scripts/tmuxinator ]; then
