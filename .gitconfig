@@ -28,11 +28,14 @@
 [core]
 	excludesfile = ~/.gitignore
 	whitespace = cr-at-eol
+	autocrlf = false
 [merge]
     ff = false
 [branch "master"]
 	rebase = true
 [branch "develop"]
+	rebase = true
+[branch "release/*"]
 	rebase = true
 [ghq]
 	root = ~/src

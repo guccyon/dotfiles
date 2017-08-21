@@ -16,6 +16,9 @@ fi
 ## Rbenv
 [ -x "`which rbenv`" ] && eval "$(rbenv init - zsh)"
 
+## Pyenv
+[ -x "`which pyenv`" ] && eval "$(pyenv init - zsh)"
+
 ## Golang
 if [ -x "`which go`" ]; then
   export GOROOT=`go env GOROOT`
@@ -36,6 +39,11 @@ fi
 ## tmuxinator
 if [ -s $HOME/.tmuxinator/scripts/tmuxinator ]; then
   source $HOME/.tmuxinator/scripts/tmuxinator
+fi
+
+## fastlane
+if [ -s $HOME/.fastlane ]; then
+  export PATH="$HOME/.fastlane/bin:$PATH"
 fi
 
 ### Options ###############################

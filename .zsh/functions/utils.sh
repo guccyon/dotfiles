@@ -64,3 +64,12 @@ function xcode () {
         find . -maxdepth 1 -name '*.xcodeproj' -exec open '{}' \;
     fi
 }
+
+function runphpcs_and_check() {
+  dcrun app vendor/bin/phpcbf --standard=config/phpcs.xml --extensions=php app
+  echo 'run check? (y or n)'
+  read answer
+  if [ "${answer}" = 'y' ]; then
+    bin/run-check_coding_rule --report=full
+  fi
+}
