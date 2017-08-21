@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/balias/functions/balias.fish
+/Users/tetsu/.config/fisherman/balias/functions/balias.fish

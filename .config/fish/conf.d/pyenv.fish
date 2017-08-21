@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/pyenv/conf.d/pyenv.fish
+/Users/tetsu/.config/fisherman/pyenv/conf.d/pyenv.fish

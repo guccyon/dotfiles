@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/aws/completions/aws.fish
+/Users/tetsu/.config/fisherman/aws/completions/aws.fish

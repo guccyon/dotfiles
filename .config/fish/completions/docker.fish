@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/docker-completion/completions/docker.fish
+/Users/tetsu/.config/fisherman/docker-completion/completions/docker.fish

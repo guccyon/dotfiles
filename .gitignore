@@ -5,6 +5,19 @@
 .zsh/.zhistory
 .zsh/zcompdump
 .zsh/zshrc.local
+
+## fish
+.config/fish/fishd*
+.config/fisherman
+.config/fish/completions/*
+!.config/fish/completions/fisher.fish
+!.config/fish/completions/nodebrew.fish
+.config/fish/conf.d/*
+.config/fish/functions/*
+!.config/fish/functions/fisher.fish
+!.config/fish/functions/peco_change_directory.fish
+!.config/fish/functions/xcode.fish
+
 .subversion
 .gitconfig
 .ssh

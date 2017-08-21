@@ -1,1 +1,0 @@
-/Users/dank1_higuchi/.config/fisherman/robbyrussell/fish_prompt.fish

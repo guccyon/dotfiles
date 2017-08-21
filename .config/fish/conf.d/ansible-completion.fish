@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/ansible-completion/conf.d/ansible-completion.fish
+/Users/tetsu/.config/fisherman/ansible-completion/conf.d/ansible-completion.fish

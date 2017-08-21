@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/rbenv/completions/rbenv.fish
+/Users/tetsu/.config/fisherman/rbenv/completions/rbenv.fish

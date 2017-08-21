@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/bundler/__is_a_bundled_executable.fish
+/Users/tetsu/.config/fisherman/bundler/__is_a_bundled_executable.fish

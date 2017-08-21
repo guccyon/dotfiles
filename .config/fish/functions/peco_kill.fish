@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/peco/functions/peco_kill.fish
+/Users/tetsu/.config/fisherman/peco/functions/peco_kill.fish

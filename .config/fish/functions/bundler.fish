@@ -1,1 +1,1 @@
-/Users/dank1_higuchi/.config/fisherman/bundler/bundler.fish
+/Users/tetsu/.config/fisherman/bundler/bundler.fish
