@@ -25,6 +25,7 @@
 #ssh_config
 hosts
 
+.config/configstore
 .config/direnv
 
 config/secrets.yml.sample
