@@ -51,3 +51,5 @@
 	templatedir = ~/.git-templates/git-secrets
 [credential]
 	helper = osxkeychain
+[pull]
+	rebase = preserve
