@@ -17,6 +17,8 @@
 !.config/fish/functions/fisher.fish
 !.config/fish/functions/peco_change_directory.fish
 !.config/fish/functions/xcode.fish
+.config/yarn/global/node_modules
+.config/hub
 
 .subversion
 .gitconfig
@@ -33,3 +35,6 @@ config/secrets.yml.sample
 
 .ansible_vault_key
 !.gitkeep
+
+package-lock.json
+

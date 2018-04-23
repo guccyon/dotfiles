@@ -1,6 +1,7 @@
 set -x EDITOR vi
 set -x SHELL /usr/local/bin/fish
 set -x LESS -R
+set -U fish_user_paths (npm bin -g) $fish_user_paths
 
 eval (direnv hook fish)
 

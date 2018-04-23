@@ -3,6 +3,7 @@ oh-my-fish/plugin-aws
 oh-my-fish/plugin-balias
 oh-my-fish/plugin-bundler
 fisherman/docker-completion
+fisherman/nodenv
 oh-my-fish/plugin-peco
 fisherman/pyenv
 fisherman/rbenv
