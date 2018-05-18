@@ -25,6 +25,7 @@
     dc = diff --cached
     gr = grep
     subup = submodule foreach 'git pull origin master'
+    pr = pull-request --browse
 [core]
 	excludesfile = ~/.gitignore
 	whitespace = cr-at-eol
@@ -54,4 +55,8 @@
 [pull]
 	rebase = preserve
 [pager]
-	branch = false
+    branch = false
+[diff]
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
