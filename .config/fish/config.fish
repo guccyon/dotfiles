@@ -27,3 +27,5 @@ balias dcrun 'docker-compose run --rm'
 balias dcr-rails 'dcrun rails'
 balias mux 'tmuxinator'
 balias gitgc 'git remote prune origin; git gc'
+set -g fish_user_paths "/usr/local/opt/libxml2/bin" $fish_user_paths
+set -g fish_user_paths (npm bin -g) $fish_user_paths
